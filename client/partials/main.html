@@ -1,0 +1,73 @@
+<div ng-controller="MafiaController" class="container-fluid">
+	<div class="container col-xs-12 col-sm-8 col-sm-offset-2" style="display: block;">
+		<div class="container-fluid col-xs-12 col-sm-6" style="border-right: 1px solid black;">
+			Number of Players: 
+			<input type="number" min="9" max="16" ng-model="list" ng-init="list" value="{{list}}" style="margin-bottom: 5px;">
+			<span ng-if="list == undefined" style="color: teal;"> Minimum group is 9 and maximum is 16 people</span>
+			<span ng-if="list"> Optimal group size is 11</span>
+			<div class = "container-fluid col-xs-12">
+				<form>
+	    	        <span ng-if="list">
+	    	        	<p class = "row" ng-repeat="i in getNumber(list) track by $index">
+	    	        		<small>Player 
+	    	        			<span ng-bind="$index+1"></span> 
+	    	        			name:
+	    	        		</small><br>
+	    	        		<input ng-model="names[$index]" type="text" name="{{$index}}" class="container-fluid">
+	    	        	</p>
+	    	        </span>
+	    	        <button ng-if="list" class="btn-default pull-left" ng-click="setNames()">Submit</button>
+	        	</form>
+        	</div>
+        </div>
+        <div class = "container-fluid col-xs-12 col-sm-6">
+        	Suggested Game Roles:
+        	<select ng-model="setup">
+        		<option value="classic">Classic</option>
+        		<!-- <option value="custom">Custom</option>
+        		<option value="advanced">Advanced</option> -->
+        	</select>
+        	<span ng-if="setup">
+        		<span ng-bind="statement"></span>
+        	</span>
+        	<ol>
+        		<li ng-repeat="i in suggestRoles(list) track by $index">
+        			<h3>
+        				<div ng-if="setup == 'classic'">
+	        				<span ng-if="i == 'Godfather' || i == 'Mafioso' || i == 'Hooker'" style="color:orange;">
+	        					<span ng-bind="i"></span>
+	        				</span>
+   		     				<span ng-if="setup == 'classic' && i != 'Godfather' && i != 'Mafioso' && i != 'Hooker' && i != 'Serial Killer'"  style="color:green;">
+   		     					<span ng-bind="i"></span>
+   		     				</span>
+  		      				<span ng-if="setup == 'classic' && i == 'Serial Killer'" style="color:purple">
+  		      					<span ng-bind="i"></span>
+  		      				</span>
+  		      			</div>
+  		      			<!-- <div ng-if="setup == 'custom'">
+  		      				<span ng-if="i.title == 'Godfather' || i.title == 'Mafioso' || i.title == 'Hooker'" style="color:orange;">{{i.title}} <input type="number" min="0" class="pull-right col-xs-6 col-sm-3" style = "color: black;" value="{{quantitySet($index)}}" ng-model="roles[$index].qty">></span>
+   		     				<span ng-if="i.title != 'Godfather' && i.title != 'Mafioso' && i.title != 'Hooker' && i.title != 'Serial Killer'" style="color:green;">{{i.title}} <input type="number" min="0" class="pull-right col-xs-6 col-sm-3" style = "color: black;" value="{{quantitySet($index)}}" ng-model="roles[$index].qty">></span>
+  		      				<span ng-if="i.title == 'Serial Killer'" style="color:purple">{{i.title}} <input type="number" min="0" max="1" class="pull-right col-xs-6 col-sm-3" style = "color: black;" value="{{quantitySet($index, i.qty)}}" ng-model="updateRole(i, $Index)"></span>
+  		      			</div> -->
+        			</h3>
+        		</li>
+        	</ol>
+        	<span ng-if="setup == 'classic'">Total Players: 
+        		<span ng-bind="roles.length"></span>
+        	</span>
+        	<!-- <span ng-if="setup == 'custom'">Total Players: <span ng-init="totalPlayers()" ng-bind="total"></span></span> -->
+        </div>
+	</div>
+	<br>
+	
+	<div class="container col-xs-12 col-sm-8 col-sm-offset-2" style="display: block; border: 1px solid black;">
+			Players in game:
+		<ul>
+			<div class="container col-xs-3">
+				<li ng-repeat="i in nameList track by $index">
+					<span ng-bind="i"></span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>

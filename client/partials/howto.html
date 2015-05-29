@@ -1,0 +1,33 @@
+<script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      header: "h1"
+    });
+  });
+  $(function() {
+    $( ".accordion2" ).accordion({
+      header: "h2"
+    });
+  });
+</script>
+
+<div ng-controller="MafiaController" class="container-fluid">
+	<div class="container" id="accordion">
+		<h1 class="maf-title">Mafia Roles</h1>
+		<div class="container-fluid col-xs-12 accordion2" style="border: 1px solid black;">
+			<h2 class="mafia">Godfather</h2>
+			<div class="container"> Text to go hurr</div>
+			<h2 class="mafia">Mafioso</h2>
+			<div class="container"> Murr text hurr</div>
+		</div>
+		<h1 class="maf-title">Town Roles</h1>
+		<div class="container-fluid col-xs-12 accordion2" style="border: 1px solid black;">
+			<h2 class="town">Sheriff</h2>
+			<div class="container">Text pls</div>
+			<h2 class="town">Doctor</h2>
+			<div class="container">I'm in need of healing!</div>
+			<h2 class="town">Townsperson</h2>
+			<div class="container">Something need doing?</div>
+		</div>
+	</div>
+</div>
